@@ -1,0 +1,245 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --cream: #f5efe3;
+  --olive: #4f5b2a;
+  --brass: #b8892d;
+  --sand: #d8c9a8;
+  /* shadcn tokens mapped onto the brand palette */
+  --background: #f5efe3;
+  --foreground: #15180e;
+  --muted: #eae0c8;
+  --muted-foreground: #5c6636;
+  --card: #fffdf6;
+  --card-foreground: #15180e;
+  --primary: #4f5b2a;
+  --primary-foreground: #f5efe3;
+  --secondary: #eae0c8;
+  --secondary-foreground: #3a431f;
+  --accent: #f0dfb8;
+  --accent-foreground: #3a431f;
+  --border: #d8c9a8;
+  --input: #c4b28c;
+  --ring: #b8892d;
+  --destructive: #b3261e;
+  --destructive-foreground: #f5efe3;
+}
+
+.dark {
+  --background: #15180e;
+  --foreground: #f5efe3;
+  --muted: #1e2414;
+  --muted-foreground: #b7bc9f;
+  --card: #1e2414;
+  --card-foreground: #f5efe3;
+  --primary: #d2a44a;
+  --primary-foreground: #15180e;
+  --secondary: #1e2414;
+  --secondary-foreground: #f5efe3;
+  --accent: #3a431f;
+  --accent-foreground: #f5efe3;
+  --border: #3a431f;
+  --input: #3a431f;
+  --ring: #d2a44a;
+  --destructive: #d96a5f;
+  --destructive-foreground: #15180e;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-cream font-sans text-olive-ink antialiased;
+  font-feature-settings: "ss01", "cv11", "tnum";
+  text-rendering: optimizeLegibility;
+  letter-spacing: -0.006em;
+}
+
+h1,
+h2,
+h3,
+.font-display {
+  font-family: var(--font-display), Georgia, serif;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+h1 {
+  line-height: 1.02;
+  font-weight: 600;
+}
+h2 {
+  line-height: 1.08;
+  font-weight: 600;
+}
+h3 {
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+code,
+kbd,
+pre,
+.font-mono,
+select,
+input[type="text"] {
+  font-variant-numeric: tabular-nums;
+}
+
+.dark body,
+.dark {
+  @apply bg-olive-ink text-cream;
+}
+
+::selection {
+  background: #b8892d;
+  color: #15180e;
+}
+
+/* Slim scrollbars for panels */
+.slim-scroll::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.slim-scroll::-webkit-scrollbar-thumb {
+  background: #c4b28c;
+  border-radius: 8px;
+}
+.dark .slim-scroll::-webkit-scrollbar-thumb {
+  background: #3a431f;
+}
+.slim-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+  }
+  .card {
+    @apply rounded-2xl border border-sand bg-cream-card shadow-card dark:border-olive-deep dark:bg-olive-surface;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-olive px-5 py-3 text-sm font-semibold text-cream transition hover:bg-olive-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brass focus-visible:ring-offset-2 active:scale-[.98] dark:bg-brass dark:text-olive-ink dark:hover:bg-brass-bright;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-sand-deep bg-transparent px-5 py-3 text-sm font-semibold text-olive-deep transition hover:border-brass hover:text-olive-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brass dark:border-olive-deep dark:text-cream dark:hover:border-brass-bright;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-sand-deep/70 bg-sand-soft/60 px-3 py-1 text-xs font-medium text-olive-deep dark:border-olive-deep dark:bg-olive-surface dark:text-cream/90;
+  }
+  .input-shell {
+    @apply rounded-2xl border border-sand-deep bg-cream-card shadow-card focus-within:border-brass focus-within:ring-2 focus-within:ring-brass/30 dark:border-olive-deep dark:bg-olive-surface dark:focus-within:border-brass-bright;
+  }
+  .section-kicker {
+    @apply font-mono text-[11px] font-semibold uppercase tracking-[0.24em] text-brass-deep dark:text-brass-bright;
+  }
+  .display-italic {
+    font-family: var(--font-display), Georgia, serif;
+    font-style: italic;
+    font-weight: 500;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid #b8892d;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* UNLAYERED (deliberately): the vendored glass hero injects its own CSS
+   unlayered, and unlayered beats @layer regardless of specificity.
+   Tames its stock scale (13cqw, 12.5rem max) to an editorial two-liner. */
+.ghr-root.hero-glass .ghr-title {
+  font-size: clamp(2.75rem, calc(6cqw + 1rem), 5rem);
+  max-width: 18ch;
+  line-height: 1;
+}
+/* Our layout, not the demo's: left-aligned editorial column on the same
+   6xl measure as the rest of the landing. The glass re-measures words
+   from where they land, so alignment changes are safe. */
+.ghr-root.hero-glass .ghr-content {
+  align-items: flex-start;
+  text-align: left;
+  padding-inline: max(1.5rem, calc((100cqw - 72rem) / 2 + 2rem));
+}
+.ghr-root.hero-glass .ghr-desc {
+  margin: 0;
+}
+.ghr-root.hero-glass .ghr-actions {
+  justify-content: flex-start;
+  margin-top: 4px;
+}
+/* Brand the glass CTA + melt the hero into the next section. */
+.ghr-root.hero-glass .ghr-primary {
+  background: #b8892d;
+  color: #15180e;
+}
+@media (hover: hover) and (pointer: fine) {
+  .ghr-root.hero-glass .ghr-primary:hover {
+    background: #d2a44a;
+  }
+}
+.ghr-root.hero-glass::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 40px;
+  background: linear-gradient(to bottom, transparent, #f5efe3);
+  pointer-events: none;
+}
+.dark .ghr-root.hero-glass::after {
+  background: linear-gradient(to bottom, transparent, #15180e);
+}
+
+/* Featured tour autoplay rail: restarts from 0 on every panel change. */
+@keyframes tour-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Testimonial marquee: pure-CSS loop so it can pause on hover/focus
+   (WCAG 2.2.2) and stop entirely for reduced-motion users. The track holds
+   two identical copies; translating -50% loops seamlessly. */
+@keyframes marquee-y {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-50%);
+  }
+}
+.marquee-track {
+  animation: marquee-y var(--marquee-duration, 28s) linear infinite;
+  will-change: transform;
+}
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    /* !important to beat the global animation-duration reset above. */
+    animation: none !important;
+  }
+}
